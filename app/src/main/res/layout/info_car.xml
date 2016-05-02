@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.example.sabah.automoto.InfoCar"
+    >
 
     <TableLayout
         android:layout_width="match_parent"
@@ -260,22 +263,22 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/powerSteelingTable"
+            android:id="@+id/powerSteeringTable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp">
 
             <TextView
-                android:id="@+id/powerSteeling"
+                android:id="@+id/powerSteering"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/cell_shape"
                 android:padding="5dp"
-                android:text="Power Steeling"
+                android:text="Power Steering"
                 android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
 
             <TextView
-                android:id="@+id/powerSteelingType"
+                android:id="@+id/powerSteeringType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/cell_shape"

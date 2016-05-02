@@ -4,7 +4,11 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.gms.appindexing.Action;
@@ -26,7 +30,7 @@ import java.net.URL;
 /**
  * Created by Sabah on 4/18/2016.
  */
-public class InfoCar extends Activity {
+public class InfoCar extends Fragment {
 
     private TextView tv_vin;
     private TextView tv_make;
@@ -34,63 +38,37 @@ public class InfoCar extends Activity {
     private TextView tv_year;
     private TextView tv_engineOilType;
     private String vin;
+    private JsonTask task = new JsonTask();
+    private JsonTask task2 = new JsonTask();
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    private GoogleApiClient client;
 
+
+    public InfoCar()  {
+        // Required empty public constructor
+    }
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.info_car);
-        vin = getIntent().getStringExtra("VIN");
-        AsyncTask<String, String, String> json = new JsonTask().execute("https://api.edmunds.com/api/vehicle/v2/vins/" + vin + "?fmt=json&api_key=rp2xq63y4bf3nc2gusq9a2uy");
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        vin = getActivity().getIntent().getStringExtra("VIN");
+                //"2g1fc3d33c9165616";
+        //Log.d("VIN Value : ",vin);
+        task.execute("https://api.edmunds.com/api/vehicle/v2/vins/" + vin + "?fmt=json&api_key=rp2xq63y4bf3nc2gusq9a2uy");
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "InfoCar Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.example.sabah.automoto/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.info_car, container, false);
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "InfoCar Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.example.sabah.automoto/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
-    }
+
+
+
 
     public class JsonTask extends AsyncTask<String, String, String> {
         @Override
@@ -136,45 +114,68 @@ public class InfoCar extends Activity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            tv_vin = (TextView) findViewById(R.id.V_vin);
-            tv_make = (TextView) findViewById(R.id.V_make);
-            tv_model = (TextView) findViewById(R.id.V_model);
-            tv_year = (TextView) findViewById(R.id.V_year);
+            tv_vin = (TextView)  getView().findViewById(R.id.V_vin);
+            tv_make = (TextView)  getView().findViewById(R.id.V_make);
+            tv_model = (TextView)  getView().findViewById(R.id.V_model);
+            tv_year = (TextView)  getView().findViewById(R.id.V_year);
 
-            tv_engineOilType = (TextView) findViewById(R.id.engineOilType);
-
+            tv_engineOilType = (TextView)  getView().findViewById(R.id.engineOilType);
+            JSONObject parentObject = null;
             try {
-                JSONObject parentObject = new JSONObject(result);
-                JSONObject makeObject = parentObject.getJSONObject("make");
-                String makeName = makeObject.getString("name");
-                JSONObject modelObject = parentObject.getJSONObject("model");
-                String modelName = modelObject.getString("name");
-                String vin = parentObject.getString("vin");
-                JSONArray yearArray = parentObject.getJSONArray("years");
-                JSONObject yearObject = yearArray.getJSONObject(0);
-                String year = yearObject.getString("year");
+                String makeName = "";
+                String modelName = "";
+                String year = "";
+                String style_id = "";
+                String vin = "";
 
+                if (result != null) {
+                    parentObject = new JSONObject(result);
+                    if (parentObject != null) {
+                        if (parentObject.optJSONObject("make") != null) {
+                            Log.d("parentObject make", parentObject.getJSONObject("make").toString());
+                JSONObject makeObject = parentObject.getJSONObject("make");
+                            if (makeObject != null) {
+                                makeName = makeObject.getString("name");
+                            }
+                JSONObject modelObject = parentObject.getJSONObject("model");
+                            if (modelObject != null) {
+                                modelName = modelObject.getString("name");
+                            }
+                            vin = parentObject.getString("vin");
+                JSONArray yearArray = parentObject.getJSONArray("years");
+                            JSONObject yearObject = null;
+                            if (yearArray != null) {
+                                yearObject = yearArray.getJSONObject(0);
+                                if (yearObject != null) {
+                                    year = yearObject.getString("year");
+                                    JSONArray stylesArray = yearObject.getJSONArray("styles");
+                                    JSONObject stylesObject = stylesArray.getJSONObject(0);
+                                    style_id = stylesObject.getString("id");
+                                }
+                            }
                 tv_make.setText(makeName);
                 tv_model.setText(modelName);
                 tv_year.setText(year);
                 tv_vin.setText(vin);
-
-                JSONArray stylesArray = yearObject.getJSONArray("styles");
-                JSONObject stylesObject = stylesArray.getJSONObject(0);
-                String style_id = stylesObject.getString("id");
-
-
-                AsyncTask<String, String, String> json = new JsonTask().execute("https://api.edmunds.com/api/vehicle/v2/styles/" + style_id + "/engines?availability=standard&fmt=json&api_key=rp2xq63y4bf3nc2gusq9a2uy");
-                String finalJson = json.toString();
-                JSONObject engObject = new JSONObject(finalJson);
-                JSONArray enginesObject = engObject.getJSONArray("engines");
+                        }
+                        if (parentObject != null) {
+                            if (parentObject.optJSONArray("engines") != null) {
+                                Log.d("parentObject engines", parentObject.getJSONArray("engines").toString());
+                                JSONArray enginesObject = parentObject.getJSONArray("engines");
                 JSONObject engines  = enginesObject.getJSONObject(0);
-
                 String type = engines.getString("type");
-
-
-
                 tv_engineOilType.setText(type);
+                            }
+                        }
+                    }
+                }
+                if (style_id != "") {
+                    Log.d("style id", "done");
+                    if (task.getStatus().toString() == "RUNNING") {
+                        task.cancel(true);
+                    }
+                    task2.execute("https://api.edmunds.com/api/vehicle/v2/styles/" + style_id + "/engines?availability=standard&fmt=json&api_key=rp2xq63y4bf3nc2gusq9a2uy");
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }

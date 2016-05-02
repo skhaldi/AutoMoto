@@ -7,12 +7,12 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="255dp"
+        android:layout_height="193dp"
         android:id="@+id/InfoLayout"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="15dp"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="45dp">
 
         <TableRow
             android:layout_width="match_parent"
@@ -21,7 +21,8 @@
             android:layout_alignParentEnd="true"
             android:weightSum="1"
             android:layout_marginLeft="5dp"
-            android:layout_marginBottom="15dp">
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -44,17 +45,17 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_height="25dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="VIN"
                 android:id="@+id/textView"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/TFvin"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="center"
                 android:layout_weight="1.00"
                 android:text=""
                 android:textColor="#3e2723" />
