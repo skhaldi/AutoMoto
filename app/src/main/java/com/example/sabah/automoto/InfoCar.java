@@ -32,11 +32,7 @@ import java.net.URL;
  */
 public class InfoCar extends Fragment {
 
-    private TextView tv_vin;
-    private TextView tv_make;
-    private TextView tv_model;
-    private TextView tv_year;
-    private TextView tv_engineOilType;
+    private TextView tv_vin, tv_make, tv_model, tv_year, tv_engineOilType, tv_engineCoolantType, tv_brakeType, tv_powerSteeringType;
     private String vin;
     private JsonTask task = new JsonTask();
     private JsonTask task2 = new JsonTask();
@@ -54,8 +50,6 @@ public class InfoCar extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         vin = getActivity().getIntent().getStringExtra("VIN");
-                //"2g1fc3d33c9165616";
-        //Log.d("VIN Value : ",vin);
         task.execute("https://api.edmunds.com/api/vehicle/v2/vins/" + vin + "?fmt=json&api_key=rp2xq63y4bf3nc2gusq9a2uy");
     }
 
@@ -64,11 +58,6 @@ public class InfoCar extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.info_car, container, false);
     }
-
-
-
-
-
 
     public class JsonTask extends AsyncTask<String, String, String> {
         @Override
@@ -120,6 +109,12 @@ public class InfoCar extends Fragment {
             tv_year = (TextView)  getView().findViewById(R.id.V_year);
 
             tv_engineOilType = (TextView)  getView().findViewById(R.id.engineOilType);
+            tv_engineCoolantType = (TextView)  getView().findViewById(R.id.engineCoolantType);
+            tv_brakeType = (TextView)  getView().findViewById(R.id.brakeType);
+            tv_powerSteeringType = (TextView)  getView().findViewById(R.id.powerSteeringType);
+
+
+            Log.d("test code", tv_make.toString());
             JSONObject parentObject = null;
             try {
                 String makeName = "";
@@ -164,13 +159,15 @@ public class InfoCar extends Fragment {
                                 JSONArray enginesObject = parentObject.getJSONArray("engines");
                 JSONObject engines  = enginesObject.getJSONObject(0);
                 String type = engines.getString("type");
-                tv_engineOilType.setText(type);
+                                tv_engineOilType.setText("10W40");
+                                tv_engineCoolantType.setText("IAT");
+                                tv_brakeType.setText("DOT5");
+                                tv_powerSteeringType.setText("Mineral Oil XXX");
                             }
                         }
                     }
                 }
                 if (style_id != "") {
-                    Log.d("style id", "done");
                     if (task.getStatus().toString() == "RUNNING") {
                         task.cancel(true);
                     }
