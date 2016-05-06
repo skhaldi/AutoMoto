@@ -1,12 +1,15 @@
 package com.example.sabah.automoto;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -46,22 +49,36 @@ public class Maintenance extends Fragment {
         TV_next.setText(" 3/23/2016 ");
         TV_or.setText(" 70,000");
 
-
-
         TableLayout tl = (TableLayout) fragmentHandle.findViewById(R.id.schedule_status_table);
+
+
+        TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(5, 5, 5, 5);
+        tl.setLayoutParams(params);
+        //tl.setBackground();
+
+        for (int i = 1; i < 5; i++) {
         TableRow row = new TableRow(getActivity());
         TextView tv = new TextView(getActivity());
-        TextView tv_status = new TextView(getActivity());
-        tv.setText("10000 miles");
-        tv_status.setText("done");
-        //Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "assets/fonts/DroidSansFallback.ttf");
+            tv.setText(" " + i * 10000 + " miles");
+            tv.setTypeface(null, Typeface.BOLD);
+            tv.setTextSize(20);
 
-        //tv.setTypeface(tf);
-        //tv_status.setTypeface(tf);
+        TextView tv_status = new TextView(getActivity());
+            tv_status.setGravity(Gravity.CENTER);
+
+            if(i == 4){
+                tv_status.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.redcross, 0, 0,0);
+            } else {
+                tv_status.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.greentick, 0, 0,0);
+            }
+
         tl.addView(row);
+            row.setBackgroundResource(R.drawable.cell_shape);
         row.addView(tv);
         row.addView(tv_status);
 
+        }
         return fragmentHandle;
     }
 }

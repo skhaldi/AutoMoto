@@ -152,21 +152,23 @@
             android:id="@+id/fluid_table"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/cell_shape"
             android:layout_marginLeft="5dp">
             <TextView
                 android:id="@+id/fluid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/cell_shape"
                 android:padding="5dp"
                 android:text="Fluid"
                 android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
-
+            <View
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:background="#000000" />
             <TextView
                 android:id="@+id/fluidType"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:background="@drawable/cell_shape"
                 android:padding="5dp"
                 android:text="Type"
                 android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
@@ -176,21 +178,23 @@
             android:id="@+id/engine_table"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/cell_shape"
             android:layout_marginLeft="5dp">
             <TextView
                 android:id="@+id/engineOil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/cell_shape"
                 android:padding="5dp"
                 android:text="Engine Oil"
                 android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
-
+            <View
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:background="#000000" />
             <TextView
                 android:id="@+id/engineOilType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/cell_shape"
                 android:padding="5dp"
                 android:text=""
                 android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
@@ -200,22 +204,24 @@
             android:id="@+id/engineCoolantTable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/cell_shape"
             android:layout_marginLeft="5dp">
 
             <TextView
                 android:id="@+id/engineCoolant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/cell_shape"
                 android:padding="5dp"
                 android:text="Engine Coolant"
                 android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
-
+            <View
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:background="#000000" />
             <TextView
                 android:id="@+id/engineCoolantType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/cell_shape"
                 android:padding="5dp"
                 android:text=""
                 android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
@@ -225,22 +231,24 @@
             android:id="@+id/brakeTable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/cell_shape"
             android:layout_marginLeft="5dp">
 
             <TextView
                 android:id="@+id/brake"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/cell_shape"
                 android:padding="5dp"
                 android:text="Brake"
                 android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
-
+            <View
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:background="#000000" />
             <TextView
                 android:id="@+id/brakeType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/cell_shape"
                 android:padding="5dp"
                 android:text=""
                 android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
@@ -250,33 +258,29 @@
             android:id="@+id/powerSteeringTable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/cell_shape"
             android:layout_marginLeft="5dp">
 
             <TextView
                 android:id="@+id/powerSteering"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/cell_shape"
                 android:padding="5dp"
                 android:text="Power Steering"
                 android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
-
+            <View
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:background="#000000" />
             <TextView
                 android:id="@+id/powerSteeringType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/cell_shape"
                 android:padding="5dp"
                 android:text=""
                 android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
         </TableRow>
     </TableLayout>
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"></TableLayout>
-
 
 </LinearLayout>
 
